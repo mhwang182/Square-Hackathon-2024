@@ -54,7 +54,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 "gift_card_gan": giftCard.gan,
                 "activate_activity_details": {
                     "amount_money": {
-                    "amount": amount,
+                    "amount": amount * 100,
                     "currency": "USD"
                     },
                     "buyer_payment_instrument_ids": [

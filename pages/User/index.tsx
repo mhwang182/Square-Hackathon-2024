@@ -4,11 +4,13 @@ import { Oval } from "react-loader-spinner";
 import LogInContent from "../../Components/LogInContent";
 import { useRouter } from 'next/router'
 import { AuthContext } from "../../context/AuthContext";
+import SpinnerOptionModal from "../../Components/SpinnerOptionModal";
 
 const Registration = () => {
 
     const [isSignUp, setIsSignUp] = useState(false);
     const [squareAuthorizeLink, setSquareAuthorizeLink] = useState("");
+    const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
     const { 
         createUser, 
@@ -17,7 +19,8 @@ const Registration = () => {
         checkLogedIn,
         logout,
         getSquareAuthorizeLink,
-        loginUser
+        loginUser,
+        getRouletteOptions
     } = useAppContext();
 
     const { checkAccessToken } = useContext(AuthContext);
@@ -29,6 +32,7 @@ const Registration = () => {
         if(userToken && userToken.length > 0){
             onAuthorizeSquare();
         }
+        getRouletteOptions();
         checkAccessToken();
 
     }, [userToken])
@@ -54,42 +58,59 @@ const Registration = () => {
     }
 
     return (
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                {userToken === '' ?
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    {isSignUp ? 'Create an Account' : 'Sign in to your account'}
-                </h2> :
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    You are logged in!
-                </h2>
-                }
-            </div>
+        <div>
+            {isOptionsOpen ? 
+                <SpinnerOptionModal onClose={() => {setIsOptionsOpen(false)}}/> : 
+                null
+            }
+            <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+                    {userToken === '' ?
+                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                        {isSignUp ? 'Create an Account' : 'Sign in to your account'}
+                    </h2> :
+                    <>
+                        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                            You are logged in!
+                        </h2>
+                        {/* <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                            
+                        </h2> */}
+                    </>
+                    }
+                </div>
 
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                {
-                    isUserLoading ? 
-                    <div className="flex flex-1 justify-center">
-                        <Oval color="#2870ed" height={100} width={100} secondaryColor=''/> 
-                    </div> : <>
-                     {userToken === "" ? 
-                        <LogInContent 
-                            isSignUp={isSignUp} 
-                            createUser={createUser} 
-                            loginUser={loginUser}
-                            onToggle={() => {setIsSignUp(!isSignUp)}}
-                        /> :
-                        <div>
-                            <MyButton text={'Connect Square Account'} onClick={() => {router.push(squareAuthorizeLink);}}/>
-                            <br />
-                            <MyButton text={'Logout'} onClick={logout}/>
-                            <br />
-                            <MyButton text={'Prize Page'} onClick={() => {router.push('/PrizePage');}}/>
-                        </div>
-                     }
-                     </>
-                }
+                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                    {
+                        isUserLoading ? 
+                        <div className="flex flex-1 justify-center">
+                            <Oval color="#2870ed" height={100} width={100} secondaryColor=''/> 
+                        </div> : <>
+                        {userToken === "" ? 
+                            <LogInContent 
+                                isSignUp={isSignUp} 
+                                createUser={createUser} 
+                                loginUser={loginUser}
+                                onToggle={() => {setIsSignUp(!isSignUp)}}
+                            /> :
+                            <div>
+                                <MyButton text={'Connect Square Account'} onClick={() => {router.push(squareAuthorizeLink);}}/>
+                                <br />
+                                
+                                <MyButton text={'Prize Page'} onClick={() => {router.push('/PrizePage');}}/>
+                                <br />
+                                <MyButton text={'Change Spinner Options'} onClick={() => {
+                                    setIsOptionsOpen(true);
+                                }}/>
+                                <br />
+                                <br />
+                                <MyButton text={'Logout'} onClick={logout}/>
+                            </div>
+                        }
+                        </>
+                    }
 
+                </div>
             </div>
         </div>
     )

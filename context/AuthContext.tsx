@@ -12,14 +12,11 @@ export const AuthProvider = ({children}) => {
 
     const checkAccessToken = async () => {
         try {
-            console.log('hello world');
             const response = await fetch("api/auth/hasValidAccessToken", {
                 method: 'POST'
             });
         
             const answer = await response.json();
-            // console.log('answer');
-            console.log(answer.hasToken);
 
             if(answer.hasToken) {
                 setHasAccessToken(true);

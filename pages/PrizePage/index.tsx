@@ -17,6 +17,7 @@ const PrizePage = () => {
     const {
         searchCustomer, 
         checkLogedIn,
+        getRouletteOptions,
         customer, 
         isCustomerLoading, 
         rouletteOptions, 
@@ -33,15 +34,22 @@ const PrizePage = () => {
     }
 
     const getOptions = () => {
-        return rouletteOptions.map(val => {
-            return val > 0 ? {label: `$${val} Gift Card`, value: val} : {label: '', value: val}
-        });
+        if(rouletteOptions){
+            return rouletteOptions.map(val => {
+                return val > 0 ? {label: `$${val} Gift Card`, value: val} : {label: '', value: val}
+            });
+        }
+        return [];
     }
 
     const getDate = () => {
         const date = new Date(Date.parse(currCustomer.created_at));
         return date.toLocaleDateString();
     }
+
+    useEffect(() => {
+        getRouletteOptions();
+    }, [userToken]);
 
     useEffect(() => {
         checkLogedIn();
