@@ -3,9 +3,11 @@ import cookieParse from 'cookie-parse';
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import getConnection from "../../../utils/connection";
+import CryptoJS from "crypto-js";
 
 const setSquareAccessToken = async (squareToken: string, email: string) => {
-    const sql = `UPDATE Users SET token='${squareToken}' WHERE email='${email}';`;
+    const hashToken = CryptoJS.AES.encrypt(squareToken, process.env.AES_KEY);
+    const sql = `UPDATE Users SET token='${hashToken}' WHERE email='${email}';`;
     const connection = await getConnection();
     await connection.execute(sql);
     await connection.end();

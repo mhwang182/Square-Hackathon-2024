@@ -1,4 +1,5 @@
 import getConnection from "./connection";
+import CryptoJS from "crypto-js";
 
 export const getSquareAccessToken = async (email: string) => {
     const connection = await getConnection();
@@ -10,7 +11,14 @@ export const getSquareAccessToken = async (email: string) => {
         const res = results[0];
         await connection.end();
 
-        return res['token'];
+        if(!res) {
+            return null;
+        }
+
+        const bytes = CryptoJS.AES.decrypt(res['token'], process.env.AES_KEY);
+        const token = bytes.toString(CryptoJS.enc.Utf8);
+ 
+        return token;
     } catch(error) {
         if(error){
             console.log(error);
