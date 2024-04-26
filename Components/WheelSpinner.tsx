@@ -38,10 +38,10 @@ const WheelSpinner = (props: IWheelSpinnerProps) => {
         if(rotateDegrees > 0){
             gsap.to(wheelSpinnerRef.current, {rotation: `+=${rotateDegrees}`, duration: 3, onComplete: () => {
                 setIsSpinning(false);
-                console.log(rotateDegrees);
-                console.log(((totalDegrees % 360)/36) + 1);
+                // console.log(rotateDegrees);
+                // console.log(((totalDegrees % 360)/36) + 1);
                 const winner = (totalDegrees % 360)/36;
-                console.log(options[winner].value);
+                // console.log(options[winner].value);
                 onSpinDone(options[winner].value)
             }})
         }

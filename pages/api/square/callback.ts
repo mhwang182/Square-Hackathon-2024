@@ -61,7 +61,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.redirect('/');
     } catch(error) {
-        if(error.response.data){
+        if(error.response){
             console.log(error.response.data.errors);
         } else {
             console.log(error);
