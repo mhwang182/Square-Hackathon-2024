@@ -12,7 +12,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }      
 
     const body = JSON.parse(req.body);
-    console.log(body);
 
     try {
         const password = body.password;
