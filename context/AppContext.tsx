@@ -23,17 +23,12 @@ interface IAppState {
     userToken: string
 }
 
-const getRouletteOptions = () => {
-    const localOptions = undefined;
-    return localOptions ? JSON.parse(localOptions) : [1, 1, 1, 1, 5, 1, 1, 1, 1, 5];
-}
-
 const initialState: IAppState = {
     customer: {} as Customer, 
     isCustomerLoading: false,
     isUserLoading: false,
     userToken: "",
-    rouletteOptions: getRouletteOptions()
+    rouletteOptions: [1, 1, 1, 1, 5, 1, 1, 1, 1, 5]
 };
 
 const AppContext = React.createContext({
