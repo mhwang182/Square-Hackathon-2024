@@ -28,14 +28,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         
         const code = req.query.code;
-        // console.log('square access token code');
-        // console.log(code);
-        
-        // console.log(req.headers.cookie);
 
         const parsedCookie = cookieParse.parse(req.headers.cookie);
-        // console.log('parsed cookie');
-        // console.log(parsedCookie);
 
         const decode = jwt.verify(parsedCookie['square-token'], process.env.JWT_SECRET);
 
@@ -46,7 +40,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             "code": code,
             "grant_type": "authorization_code",
             "short_lived": false,
-            "client_secret": process.env.SQUARE_APP_SECRET
+            "client_secret": process.env.SQUARE_APP_SECRET,
+            "scopes": [
+                "CUSTOMERS_READ",
+                "GIFTCARDS_WRITE",
+                "MERCHANT_PROFILE_READ"
+            ]
         },{
             headers: {
                 'Authorization': `Bearer ${process.env.SQUARE_APP_TOKEN}`

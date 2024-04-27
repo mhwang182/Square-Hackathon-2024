@@ -16,7 +16,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
         res.status(401).json({});
     }
     
-    const link = `${process.env.BASE_API_URL}/oauth2/authorize?session=false&client_id=${process.env.SQUARE_CLIENT_ID}&scope=GIFTCARDS_READ%20CUSTOMERS_READ%20GIFTCARDS_WRITE`
+    const link = `${process.env.BASE_API_URL}/oauth2/authorize?session=false&client_id=${process.env.SQUARE_CLIENT_ID}&scope=GIFTCARDS_READ%20CUSTOMERS_READ%20GIFTCARDS_WRITE%20MERCHANT_PROFILE_READ`
 
     res.status(200).json({link});
 }
