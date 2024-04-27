@@ -20,21 +20,6 @@ const Modal = ({onClose} : {onClose: () => void}) => {
         }
     }
 
-    const OptionInput = ({index, onChange}) => {
-        return (
-            <div className="flex items-center justify-between mb-1">
-                <label>{`Option ${index + 1}:`}</label>
-                <input type="text" 
-                    value={array[index]} 
-                    className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
-                    onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                        onChange(index, e);
-                    }}
-                />
-            </div>
-        )
-    }
-
     const onSave = async () => {
         await setRouletteOptions(JSON.stringify(array));
         onClose();
@@ -55,16 +40,106 @@ const Modal = ({onClose} : {onClose: () => void}) => {
                         Spinner Options
                       </h3>
                       <div className="mt-2 container flex flex-col w-68">
-                        <OptionInput index={0} onChange={onInputChange}/>
-                        <OptionInput index={1} onChange={onInputChange}/>
-                        <OptionInput index={2} onChange={onInputChange}/>
-                        <OptionInput index={3} onChange={onInputChange}/>
-                        <OptionInput index={4} onChange={onInputChange}/>
-                        <OptionInput index={5} onChange={onInputChange}/>
-                        <OptionInput index={6} onChange={onInputChange}/>
-                        <OptionInput index={7} onChange={onInputChange}/>
-                        <OptionInput index={8} onChange={onInputChange}/>
-                        <OptionInput index={9} onChange={onInputChange}/>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${1} (USD):`}</label>
+                            <input type="text" 
+                                value={array[0]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(0, e);
+                                }}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${2} (USD):`}</label>
+                            <input type="text" 
+                                value={array[1]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(1, e);
+                                }}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${3} (USD):`}</label>
+                            <input type="text" 
+                                value={array[2]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(2, e);
+                                }}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${4} (USD):`}</label>
+                            <input type="text" 
+                                value={array[3]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(3, e);
+                                }}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${5} (USD):`}</label>
+                            <input type="text" 
+                                value={array[4]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(4, e);
+                                }}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${6} (USD):`}</label>
+                            <input type="text" 
+                                value={array[5]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(5, e);
+                                }}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${7} (USD):`}</label>
+                            <input type="text" 
+                                value={array[6]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(6, e);
+                                }}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${8} (USD):`}</label>
+                            <input type="text" 
+                                value={array[7]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(7, e);
+                                }}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${9} (USD):`}</label>
+                            <input type="text" 
+                                value={array[8]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(8, e);
+                                }}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between mb-1">
+                            <label>{`Option ${10} (USD):`}</label>
+                            <input type="text" 
+                                value={array[9]} 
+                                className="w-24 block rounded-md border-0 py-1.5 px-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600" 
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    onInputChange(9, e);
+                                }}
+                            />
+                        </div>
                       </div>
                     </div>
                   </div>
