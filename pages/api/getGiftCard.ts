@@ -24,12 +24,26 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const userEmail = decode.email;
         const accessToken = await getSquareAccessToken(userEmail); //hash eventually   
 
+        const locResponse = await axios.get(`${process.env.BASE_API_URL}/v2/locations`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
+
+        if(!locResponse.data.locations) {
+            res.status(400).json({});
+            return;
+        }
+        console.log(locResponse.data)
+
+        const locationId = locResponse.data.locations[0].id;
+
         const createResponse = await axios.post(`${process.env.BASE_API_URL}/v2/gift-cards`, {
             "gift_card": {
                 "type": "DIGITAL"
             },
             "idempotency_key": md5(`${customerId}-${Date.now()}`),
-            "location_id": "L1GZPV3VZAJN0"
+            "location_id": locationId
         }, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -50,7 +64,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         await axios.post(`${process.env.BASE_API_URL}/v2/gift-cards/activities`, {
             "gift_card_activity": {
                 "type": "ACTIVATE",
-                "location_id": "L1GZPV3VZAJN0",
+                "location_id": locationId,
                 "gift_card_gan": giftCard.gan,
                 "activate_activity_details": {
                     "amount_money": {
