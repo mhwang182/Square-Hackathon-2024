@@ -17,12 +17,15 @@ const PrizePage = () => {
     const {
         searchCustomer, 
         checkLogedIn,
-        getRouletteOptions,
         customer, 
         isCustomerLoading, 
-        rouletteOptions, 
         userToken
     } = useAppContext();
+
+    const {
+        rouletteOptions,
+        setRouletteOptionsCxt
+    } = useContext(AuthContext);
 
     const {hasAccessToken} = useContext(AuthContext);
 
@@ -47,9 +50,9 @@ const PrizePage = () => {
         return date.toLocaleDateString();
     }
 
-    useEffect(() => {
-        getRouletteOptions();
-    }, [userToken]);
+    // useEffect(() => {
+    //     getRouletteOptions();
+    // }, [userToken]);
 
     useEffect(() => {
         checkLogedIn();

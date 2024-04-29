@@ -19,7 +19,7 @@ interface IAppState {
     customer?: Customer,
     isCustomerLoading: boolean,
     isUserLoading: boolean,
-    rouletteOptions: number[],
+    // rouletteOptions: number[],
     userToken: string
 }
 
@@ -28,7 +28,7 @@ const initialState: IAppState = {
     isCustomerLoading: false,
     isUserLoading: false,
     userToken: "",
-    rouletteOptions: [1, 1, 1, 1, 5, 1, 1, 1, 1, 5]
+    // rouletteOptions: [1, 1, 1, 1, 5, 1, 1, 1, 1, 5]
 };
 
 const AppContext = React.createContext({
@@ -40,8 +40,8 @@ const AppContext = React.createContext({
     checkLogedIn: (): any => {},
     logout: (): any => {},
     getSquareAuthorizeLink: (token: string): any => {},
-    getRouletteOptions: (): any => {},
-    setRouletteOptions: (options: string): any => {}
+    // getRouletteOptions: (): any => {},
+    // setRouletteOptions: (options: string): any => {}
 });
 
 const reducer = (state, action): IAppState => {
@@ -61,8 +61,9 @@ const reducer = (state, action): IAppState => {
             return {...state, userToken: action.payload.token}
         case 'logout':
             return {...state, userToken: ""}
-        case 'setRouletteOptions':
-            return {...state, rouletteOptions: action.payload.options}
+        // case 'setRouletteOptions':
+        //     console.log('options set');
+        //     return {...state, rouletteOptions: action.payload.options}
         default:
             throw Error()
     }
@@ -188,48 +189,48 @@ export const ContextProvider = ({children}: {children: ReactElement}) => {
         }
     }
 
-    const getRouletteOptions = async () => {
-        try {
-            const response = await fetch("api/options/get", {
-                method: 'GET',
-            });
+    // const getRouletteOptions = async () => {
+    //     try {
+    //         const response = await fetch("api/options/get", {
+    //             method: 'GET',
+    //         });
 
-            const json = await response.json();
-            if(!json.options) {
-                dispatch({
-                    type: "setRouletteOptions", 
-                    payload: {options: [1, 1, 1, 1, 5, 1, 1, 1, 1, 5]}})
-                return;
-            }
+    //         const json = await response.json();
+    //         if(!json.options) {
+    //             dispatch({
+    //                 type: "setRouletteOptions", 
+    //                 payload: {options: [1, 1, 1, 1, 5, 1, 1, 1, 1, 5]}})
+    //             return;
+    //         }
             
-            console.log(json.options);
+    //         console.log(json.options);
             
-            const rouletteOptions = JSON.parse(json.options);
-            // console.log(rouletteOptions);
-            // console.log(JSON.parse(json.options)[0])
-            dispatch({type: "setRouletteOptions", payload: {options: rouletteOptions}})
-        } catch(error) {
+    //         const rouletteOptions = JSON.parse(json.options);
+    //         // console.log(rouletteOptions);
+    //         // console.log(JSON.parse(json.options)[0])
+    //         dispatch({type: "setRouletteOptions", payload: {options: rouletteOptions}})
+    //     } catch(error) {
 
-        }
-    }
+    //     }
+    // }
 
-    const setRouletteOptions = async (options: string) => {
-        try {
-            const response = await fetch("api/options/set", {
-                method: 'POST',
-                body: JSON.stringify({options: JSON.stringify(options)})
-            });
+    // const setRouletteOptions = async (options: string) => {
+    //     try {
+    //         const response = await fetch("api/options/set", {
+    //             method: 'POST',
+    //             body: JSON.stringify({options: JSON.stringify(options)})
+    //         });
 
-            const json = await response.json();
-            if(!json.options) {
-                return;
-            }
-            const rouletteOptions = json.options;
-            dispatch({type: "setRouletteOptions", payload: {options: rouletteOptions}});
-        } catch(error) {
+    //         const json = await response.json();
+    //         if(!json.options) {
+    //             return;
+    //         }
+    //         const rouletteOptions = json.options;
+    //         dispatch({type: "setRouletteOptions", payload: {options: rouletteOptions}});
+    //     } catch(error) {
 
-        }
-    }
+    //     }
+    // }
 
     return (
         <AppContext.Provider value={{
@@ -241,8 +242,8 @@ export const ContextProvider = ({children}: {children: ReactElement}) => {
             logout, 
             getSquareAuthorizeLink,
             loginUser,
-            getRouletteOptions,
-            setRouletteOptions
+            // getRouletteOptions,
+            // setRouletteOptions
         }}>
             {children}
         </AppContext.Provider>

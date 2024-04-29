@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useAppContext } from "../context/AppContext";
+import { AuthContext } from "../context/AuthContext";
 
 const Modal = ({onClose} : {onClose: () => void}) => {
 
-    const { rouletteOptions, setRouletteOptions} = useAppContext();
-
-    const [array, setArray] = useState(rouletteOptions);
+    const { rouletteOptions, setRouletteOptionsCxt} = useContext(AuthContext);
+    const [array, setArray] = useState([...rouletteOptions]);
 
     const onInputChange = (index: number, e: React.FormEvent<HTMLInputElement>) => {
         if(e.currentTarget.value === '') {
@@ -21,7 +21,7 @@ const Modal = ({onClose} : {onClose: () => void}) => {
     }
 
     const onSave = async () => {
-        await setRouletteOptions(JSON.stringify(array));
+        await setRouletteOptionsCxt(array);
         onClose();
     }
 

@@ -23,11 +23,7 @@ const Modal = (props: IModalProps) => {
         setIsGiftCardLoading(false);
       }
     }
-
-    useEffect(() => {
-      console.log(giftCard);
-    }, [giftCard])
-
+    
     const { onClose, prizeValue } = props;
     return (
         <div className="relative z-40" aria-labelledby="modal-title" role="dialog" aria-modal="true">

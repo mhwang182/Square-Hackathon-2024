@@ -20,10 +20,9 @@ const Registration = () => {
         logout,
         getSquareAuthorizeLink,
         loginUser,
-        getRouletteOptions
     } = useAppContext();
 
-    const { checkAccessToken } = useContext(AuthContext);
+    const { checkAccessToken, getRouletteOptions } = useContext(AuthContext);
 
     const router = useRouter();
 
@@ -32,14 +31,9 @@ const Registration = () => {
         if(userToken && userToken.length > 0){
             onAuthorizeSquare();
         }
-        getRouletteOptions();
         checkAccessToken();
-
+        getRouletteOptions();
     }, [userToken])
-
-    useEffect(() => {
-        console.log(squareAuthorizeLink);
-    }, [squareAuthorizeLink])
 
     const onAuthorizeSquare = async () => {
         const link = await getSquareAuthorizeLink(userToken);
